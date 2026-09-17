@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Encantar Demo</title>
+    <link href="./css/style.css" rel="stylesheet" />
+    <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+    <script src="./js/encantar.min.js"></script>
+    <script src="./js/aframe-with-encantar.min.js"></script>
+    <script src="./js/ar-scan-gimmick.min.js"></script>
+    <script src="./js/gltf-anim.min.js"></script>
+  </head>
+  <body>
+    <a-scene
+      encantar="stats: true; gizmos: true"
+      loading-screen="enabled: true"
+    >
+      <ar-sources>
+        <ar-camera-source></ar-camera-source>
+      </ar-sources>
+      <ar-trackers>
+        <ar-image-tracker>
+          <ar-reference-image name="mage" src="./img/mage.webp">
+          </ar-reference-image>
+          <ar-reference-image name="cat" src="./img/cat.webp">
+          </ar-reference-image>
+        </ar-image-tracker>
+      </ar-trackers>
+      <ar-viewport>
+        <ar-hud>
+          <a
+            id="info"
+            href="./notice.html"
+            draggable="false"
+            aria-description="Attribution notices"
+          >
+          </a>
+          <ar-scan-gimmick opacity="0.75"></ar-scan-gimmick>
+        </ar-hud>
+      </ar-viewport>
+      <ar-camera></ar-camera>
+      <ar-root reference-image="mage">
+        <a-entity rotation="-90 0 0" position="0 -0.8 0">
+          <a-light type="ambient" intensity="3.1416"></a-light>
+          <a-entity
+            gltf-model="#mage-model"
+            gltf-anim="clip: Idle"
+            rotation="90 0 0"
+            scale="0.7 0.7 0.7"
+          >
+          </a-entity>
+          <a-plane
+            width="4"
+            height="4"
+            material="src: #magic-circle; color: #beefff; side: double; shader: flat; transparent: true; opacity: 1"
+            animation="property: object3D.rotation.z; from: 360; to: 0; dur: 8000; loop: true; easing: linear"
+          ></a-plane>
+        </a-entity>
+      </ar-root>
+      <ar-root reference-image="cat">
+        <a-entity rotation="-90 0 0" position="0 -0.8 0">
+          <a-light type="ambient" intensity="1.0"></a-light>
+          <a-entity
+            gltf-model="#cat-model"
+            gltf-anim="clip: Cheer"
+            rotation="90 0 0"
+            scale="0.7 0.7 0.7"
+          >
+          </a-entity>
+          <a-plane
+            width="4"
+            height="4"
+            material="src: #magic-circle; color: #ffa; side: double; shader: flat; transparent: true; opacity: 1"
+            animation="property: object3D.rotation.z; from: 360; to: 0; dur: 8000; loop: true; easing: linear"
+          >
+          </a-plane>
+
+          <a-entity position="0 -0.5 2">
+            <a-plane
+              width="3"
+              height="1.5"
+              rotation="90 0 0"
+              material="src: #it-works; color: #fff; side: double; shader: flat; transparent: true; opacity: 1"
+            >
+            </a-plane>
+          </a-entity>
+        </a-entity>
+      </ar-root>
+      <a-assets>
+        <a-asset-item id="cat-model" src="./models/cat.glb"></a-asset-item>
+        <a-asset-item id="mage-model" src="./models/mage.glb"></a-asset-item>
+        <img id="magic-circle" src="./img/magic-circle.png" />
+        <img id="it-works" src="./img/it-works.png" />
+      </a-assets>
+    </a-scene>
+  </body>
+</html>
